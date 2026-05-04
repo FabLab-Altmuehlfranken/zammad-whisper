@@ -1,0 +1,6 @@
+---
+services:
+  zammad-whisper:
+    build:
+      context: .
+    env_file: .env

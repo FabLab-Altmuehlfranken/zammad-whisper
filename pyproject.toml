@@ -1,0 +1,11 @@
+[project]
+name = "zammad-whisper"
+version = "1.0.0"
+description = "Searches open Zammad tickets for voice notes and adds a comment with a Whisper transcription"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "openai-whisper>=20250625",
+    "requests>=2.33.1",
+    "zammad-py>=3.2.1",
+]
