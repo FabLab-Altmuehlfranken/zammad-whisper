@@ -1,0 +1,21 @@
+name: Docker build and push
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v7
+        with:
+          pull: true
+          tags: ghcr.io/fablab-altmuehlfranken/zammad-whisper:latest
+          push: true
