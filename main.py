@@ -7,6 +7,7 @@ import whisper
 from zammad_py import ZammadAPI
 
 from flask import Flask
+from flask import request
 from flask_executor import Executor
 
 
@@ -92,8 +93,10 @@ def process_ticket(ticket):
 
 
 @app.route("/webhook", methods=["POST"])
-def webhook(data):
+def webhook():
+    data = request.get_json()
     executor.submit(process_ticket, data)
+    return "lets go"
 
 
 @app.route("/health")
