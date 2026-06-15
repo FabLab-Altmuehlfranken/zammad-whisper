@@ -9,6 +9,7 @@ dependencies = [
     "flask-executor>=1.0.0",
     "openai-whisper>=20250625",
     "requests>=2.33.1",
+    "sentry-sdk>=2.62.0",
     "zammad-py>=3.2.1",
 ]
 

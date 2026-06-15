@@ -3,13 +3,18 @@ import sys
 import tempfile
 from typing import ByteString, Dict, Optional
 
+import sentry_sdk
 import whisper
+from flask import Flask, request
+from flask_executor import Executor
 from zammad_py import ZammadAPI
 
-from flask import Flask
-from flask import request
-from flask_executor import Executor
-
+sentry_sdk.init(
+    dsn="https://961bd35ac2e74f80a1bcc306aa0f2294@glitchtip.eduardbaer.de/2",
+    traces_sample_rate=0.01,  # 1% of transactions — adjust to your needs
+    auto_session_tracking=False,  # GlitchTip does not support sessions
+    # enable_logs=True,  # Opt-in: send logs to GlitchTip (uses disk space)
+)
 
 app = Flask(__name__)
 executor = Executor(app)
@@ -19,7 +24,7 @@ def get_zammad_client() -> ZammadAPI:
     zammad_url = os.getenv("ZAMMAD_URL")
     zammad_token = os.getenv("ZAMMAD_TOKEN")
 
-    if zammad_url is None or zammad_url is None:
+    if zammad_url is None or zammad_token is None:
         print("Missing ZAMMAD_URL/ZAMMAD_TOKEN environment variable", file=sys.stderr)
         exit(1)
 
