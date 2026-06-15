@@ -19,7 +19,7 @@ def get_zammad_client() -> ZammadAPI:
     zammad_url = os.getenv("ZAMMAD_URL")
     zammad_token = os.getenv("ZAMMAD_TOKEN")
 
-    if zammad_url is None or zammad_url is None:
+    if zammad_url is None or zammad_token is None:
         print("Missing ZAMMAD_URL/ZAMMAD_TOKEN environment variable", file=sys.stderr)
         exit(1)
 
